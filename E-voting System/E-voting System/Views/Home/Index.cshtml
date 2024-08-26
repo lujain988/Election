@@ -1,0 +1,507 @@
+﻿@model IEnumerable<E_voting_System.Models.ElectionSchedule>
+
+@{
+    ViewBag.Title = "Election Schedule";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var dateNOW = DateTime.Now;
+    var Dates = Session["electionDates"] as E_voting_System.Models.ElectionSchedule;
+
+    var startDateOfElection = Dates?.Start_Date_Of_Election;
+    var endDateOfElection = Dates?.End_Date_Of_Election;
+
+    var electionStartDateStr = startDateOfElection.HasValue
+        ? startDateOfElection.Value.ToString("yyyy-MM-ddTHH:mm:ss")
+        : "1970-01-01T00:00:00";
+}
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function startCountdown(elementId, startDateStr) {
+            const countdownElement = document.getElementById(elementId);
+            const targetDate = new Date(startDateStr).getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeRemaining = targetDate - now;
+
+                if (timeRemaining < 0) {
+                    countdownElement.innerHTML = "<div class='countdown-card'>انتهى الوقت!</div>";
+                    return;
+                }
+
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `
+                    <div class='countdown-card'><span>${days}</span><label>أيام</label></div>
+                    <div class='countdown-card'><span>${hours}</span><label>ساعات</label></div>
+                    <div class='countdown-card'><span>${minutes}</span><label>دقائق</label></div>
+                    <div class='countdown-card'><span>${seconds}</span><label>ثواني</label></div>
+                `;
+            }
+
+            // Initial call
+            updateCountdown();
+            // Update countdown every second
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Pass the start date string to the countdown function
+        const electionStartDateStr = '@electionStartDateStr';
+        startCountdown('election-timer', electionStartDateStr);
+    });
+</script>
+<style>
+    .custom-container {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        margin: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .custom-image {
+        flex: 1;
+        margin-right: 20px;
+    }
+
+        .custom-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+    .custom-text {
+        flex: 2;
+    }
+
+        .custom-text h2 {
+            margin-top: 0;
+            color: #153448;
+        }
+
+        .custom-text p {
+            margin: 10px 0;
+            color: #3C5B6F;
+            line-height: 1.6;
+        }
+</style>
+
+@{
+    ViewBag.Title = "NVS";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // assuming your layout file is _Layout.cshtml
+}
+
+<!-- CSS FILES -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/Content/css/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="~/Content/css/slick.css" />
+<link href="~/Content/css/tooplate-little-fashion.css" rel="stylesheet">
+
+
+
+@*<h2>Slider Example</h2>*@
+<div id="mySlider" class="slider">
+    <br /><br /><br /><br /><br /><br /><br />
+    <!-- Slider container -->
+    <div class="slider-container">
+        <img src="~/Content/assets/images/Screenshot 2024-08-21 194929.png" alt="Los Angeles" style="height:650px">
+        <img src="~/Content/assets/images/Screenshot 2024-08-21 194753.png" alt="Chicago" style="height:650px">
+        <img src="~/Content/assets/images/Screenshot 2024-08-21 195022.png" alt="New York" style="height:650px">
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left slider-control" onclick="moveSlide(-1)">&#10094;</a>
+    <a class="right slider-control" onclick="moveSlide(1)">&#10095;</a>
+</div>
+<br />
+<br />
+
+
+
+<center>
+    <div class="row text-center">
+        <h3> نظام الاقتراع الوطني </h3><center>
+            <div class="line2"></div>
+            <div class="line"></div>
+        </center>
+    </div>
+    <br /><br />
+
+    <div style="display: flex; flex-direction: column; align-items: center; padding: 10px;   background-color: white; width: 100%;">
+        <div style="flex: 1; margin-bottom: 10px;">
+            <p style="width: 95%; max-width: 800px; margin: 10px auto; color: #555; text-align: center;">
+                الانتخابات الإلكترونية في الأردن تمثل خطوة متقدمة نحو تعزيز الديمقراطية وتسهيل مشاركة المواطنين في العملية الانتخابية. يتيح النظام الإلكتروني للناخبين الإدلاء بأصواتهم بسهولة وأمان عبر الإنترنت، مما يقلل من التحديات اللوجستية ويعزز من نزاهة وشفافية الانتخابات. يسعى الأردن من خلال هذه المبادرة إلى مواكبة التطورات التكنولوجية وتقديم تجربة انتخابية متقدمة تلبي تطلعات المواطنين وتضمن تمثيل إرادتهم بدقة.
+            </p>
+        </div>
+        <img src="~/Content/images/product/Screenshot 2024-08-21 210645.png" alt="Image" style="width: 70%; height: auto; object-fit: cover; border-radius: 5px;">
+    </div>
+    <br /><br /> <br />
+    <br />
+    <br />
+    <center>
+        <div class="row text-center">
+            <h3> الوقت الباقي لبدء الانتخابات النيابية 2024</h3><center>
+                <div class="line2"></div>
+                <div class="line"></div>
+            </center>
+        </div>
+        <div class="container mt-4">
+            <div class="col-md-6 mb-4">
+                <div id="election-timer" class="countdown-timer">
+                    <div class="countdown-card light-red">
+                        <span id="days">00</span>
+                        <label>Days</label>
+                    </div>
+                    <div class="countdown-card light-green">
+                        <span id="hours">00</span>
+                        <label>Hours</label>
+                    </div>
+                    <div class="countdown-card black">
+                        <span id="minutes">00</span>
+                        <label>Minutes</label>
+                    </div>
+                    <div class="countdown-card white">
+                        <span id="seconds">00</span>
+                        <label>Seconds</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </center>
+
+    <br />
+    <br />
+    <br />
+    <center>
+        <div class="row text-center">
+            <h3> لماذا نظام الاقتراع الوطني ؟ </h3><center>
+                <div class="line2"></div>
+                <div class="line"></div>
+            </center>
+        </div>
+        <br /><br />
+
+        <div class="custom-container" style="display: flex;">
+            <div class="custom-image" style="width: 50vw;">
+                <img src="~/Content/images/product/139996C5-5A04-4DC8-92C8-149728480269.jpg" alt="صورة" style="width: 100%; height: auto;">
+            </div>
+            <div class="custom-text" style="flex-grow: 1; font-size: 0.8em; padding: 1rem;">
+                <h4>رؤيتنا</h4>
+                <p>نطمح إلى تحقيق نظام اقتراع وطني شامل في الأردن يعكس إرادة الشعب بأعلى مستويات الشفافية والنزاهة، ويعزز من مكانة الأردن كدولة ديمقراطية رائدة في المنطقة.</p>
+
+                <h4>رسالتنا</h4>
+                <p>تقديم نظام اقتراع متطور في الأردن يتيح لجميع المواطنين ممارسة حقهم الانتخابي بسهولة وأمان، مع ضمان نزاهة وشفافية العملية الانتخابية من خلال تبني أفضل الممارسات العالمية والتكنولوجيا الحديثة.</p>
+
+
+            </div>
+        </div> <br />
+        <br />
+        <br />
+        <div class="row text-center">
+            <h3> الانتخابات التي أشرفنا عليها</h3><center>
+                <div class="line2"></div>
+                <div class="line"></div>
+            </center>
+        </div>
+        <section class="featured-product section-padding">
+            <div class="container" style="direction:rtl;">
+                <center>
+
+                </center>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-12 mb-3">
+                        <div class="product-thumb">
+                            <a href="product-detail.html">
+                                <img src="~/Content/assets/jordan/vote1.jpeg" class="img-fluid product-image" alt="انتخابات غرفة الصناعة والتجارة">
+                            </a>
+                            <div class="product-top d-flex">
+                                <span class="product-alert me-auto">انتخابات جديدة</span>
+                                <a href="#" class="bi-heart-fill product-icon"></a>
+                            </div>
+                            <div class="product-info d-flex">
+                                <div>
+                                    <h5 class="product-title mb-0">
+                                        <a href="product-detail.html" class="product-title-link">انتخابات غرفة الصناعة والتجارة</a>
+                                    </h5>
+                                    <p class="product-p">نحن أشرفنا على هذه الانتخابات لضمان نزاهتها وشفافيتها.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-12 mb-3">
+                        <div class="product-thumb">
+                            <a href="product-detail.html">
+                                <img src="~/Content/assets/jordan/vote3.jpg" class="img-fluid product-image" alt="الانتخابات البلدية واللامركزية">
+                            </a>
+                            <div class="product-top d-flex">
+                                <span class="product-alert">انتخابات سابقة</span>
+                                <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                            </div>
+                            <div class="product-info d-flex">
+                                <div>
+                                    <h5 class="product-title mb-0">
+                                        <a href="product-detail.html" class="product-title-link">الانتخابات البلدية واللامركزية</a>
+                                    </h5>
+                                    <p class="product-p">كانت هذه الانتخابات تحت إشرافنا لضمان تحقيق تمثيل عادل.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="product-thumb">
+                            <a href="product-detail.html">
+                                <img src="~/Content/assets/jordan/vote4.jpg" class="img-fluid product-image" alt="الانتخابات النيابية">
+                            </a>
+                            <div class="product-top d-flex">
+                                <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                            </div>
+                            <div class="product-info d-flex">
+                                <div>
+                                    <h5 class="product-title mb-0">
+                                        <a href="product-detail.html" class="product-title-link">الانتخابات النيابية</a>
+                                    </h5>
+                                    <p class="product-p">أشرفنا على هذه الانتخابات لضمان سيرها بسلاسة ونزاهة.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="~/Content/js/jquery.min.js"></script>
+        <script src="~/Content/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Content/js/Headroom.js"></script>
+        <script src="~/Content/js/jQuery.headroom.js"></script>
+        <script src="~/Content/js/slick.min.js"></script>
+        <script src="~/Content/js/custom.js"></script>
+
+        <style>
+            .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+                --bs-gutter-x: -0.5rem;
+                padding-right: calc(var(--bs-gutter-x)*)
+            }
+
+            .section-padding {
+                padding-top: 7rem;
+                padding-bottom: 7rem;
+                padding-left: 5rem;
+                padding-right: 5rem;
+            }
+
+            .countdown-timer {
+                font-size: 1.5rem;
+                padding: 20px;
+                background-color: #333;
+                color: #0f0; /* Classic digital clock color */
+                border-radius: 10px;
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-around;
+                text-align: center;
+            }
+
+            .countdown-card {
+                background-color: #444;
+                border: 1px solid #555;
+                border-radius: 5px;
+                padding: 10px;
+                width: 100px;
+            }
+
+                .countdown-card span {
+                    display: block;
+                    font-size: 2.5rem; /* Larger numbers for visibility */
+                }
+
+                .countdown-card label {
+                    display: block;
+                    font-size: 1rem;
+                    margin-top: 5px;
+                }
+
+            .light-red {
+                color: lightcoral;
+            }
+
+            .light-green {
+                color: lightgreen;
+            }
+
+            .black {
+                color: black;
+            }
+
+            .white {
+                color: white;
+            }
+
+            .slider {
+                position: relative;
+                max-width: 100%;
+                overflow: hidden;
+            }
+
+            .slider-container {
+                display: flex;
+                transition: transform 0.5s ease;
+            }
+
+                .slider-container img {
+                    width: 100%;
+                    flex-shrink: 0;
+                    height: 400px; /* Adjust the height as needed */
+                    object-fit: cover;
+                }
+
+            .slider-control {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+                padding: 16px;
+                cursor: pointer;
+                z-index: 1000;
+            }
+
+            .left {
+                left: 0;
+            }
+
+            .right {
+                right: 0;
+            }
+
+            body, h1, h2, h3, h4, h5, h6 {
+                font-family: 'Cairo', sans-serif;
+            }
+
+            .line {
+                border-bottom: 3px solid red;
+                margin-top: 3px;
+                width: 70%;
+            }
+
+            .line2 {
+                border-bottom: 3px solid darkgreen;
+                margin-top: 3px;
+                width: 60%;
+            }
+
+            .countdown-timer {
+                font-size: 2rem; /* Increase font size for better visibility */
+                padding: 30px;
+                background-color: #333;
+                color: #fff; /* White text for better readability */
+                border-radius: 15px;
+                display: flex;
+                justify-content: space-around;
+                text-align: center;
+            }
+
+            .countdown-card {
+                background-color: #444;
+                border: 1px solid #555;
+                border-radius: 10px;
+                padding: 15px;
+                width: 120px; /* Slightly wider for better spacing */
+                transition: transform 0.3s; /* Add transition for hover effect */
+            }
+
+                .countdown-card:hover {
+                    transform: scale(1.1); /* Scale up on hover */
+                }
+
+                .countdown-card span {
+                    display: block;
+                    font-size: 3rem; /* Larger numbers for visibility */
+                }
+
+                .countdown-card label {
+                    display: block;
+                    font-size: 1.2rem; /* Slightly larger labels */
+                    margin-top: 5px;
+                }
+
+            .light-red {
+                color: #ff6347; /* Tomato color */
+            }
+
+            .light-green {
+                color: #32cd32; /* Lime green */
+            }
+
+            .black {
+                color: #000; /* Black */
+            }
+
+            .white {
+                color: #fff; /* White */
+            }
+        </style>
+        @* ------------------------------------------------------------------------------ *@
+        <script>
+    let currentIndex = 0;
+
+    function moveSlide(direction) {
+        const sliderContainer = document.querySelector('.slider-container');
+        const totalSlides = document.querySelectorAll('.slider-container img').length;
+        const slideWidth = sliderContainer.clientWidth;
+
+        currentIndex += direction;
+
+        if (currentIndex < 0) {
+            currentIndex = totalSlides - 1;
+        } else if (currentIndex >= totalSlides) {
+            currentIndex = 0;
+        }
+
+        sliderContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+
+    // Auto slide every 5 seconds
+    setInterval(() => moveSlide(1), 5000);
+
+     // Parse the start date from Razor variable
+ var startDateOfElection = new Date('@electionStartDateStr');
+
+ function updateTimer() {
+     var now = new Date().getTime();
+     var distance = startDateOfElection - now;
+
+     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+     document.getElementById("days").innerHTML = days;
+     document.getElementById("hours").innerHTML = hours;
+     document.getElementById("minutes").innerHTML = minutes;
+     document.getElementById("seconds").innerHTML = seconds;
+
+     // If the countdown is finished, clear the interval
+     if (distance < 0) {
+         clearInterval(timerInterval);
+         document.getElementById("election-timer").innerHTML = "Election Started";
+     }
+ }
+
+ // Update the timer every second
+ var timerInterval = setInterval(updateTimer, 1000);
+        </script>

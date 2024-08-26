@@ -1,0 +1,119 @@
+﻿@model E_voting_System.Models.USER
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<style>
+    body, h1, h2, h3, h4, h5, h6 h2, button {
+        font-family: 'Cairo', sans-serif;
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 1100px; /* Increase the width here */
+        height: max-content;
+        margin: auto;
+    }
+
+    .login-image {
+        flex: 1;
+        max-width: 45%;
+        margin-right: 20px;
+    }
+
+        .login-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+    .login-form-wrapper {
+        flex: 1;
+        max-width: 50%;
+    }
+
+    .loggin_button {
+        text-align: center;
+    }
+
+    .line {
+        border-bottom: 3px solid red;
+        margin-top: 3px;
+        width: 70%;
+    }
+
+    .line2 {
+        border-bottom: 3px solid darkgreen;
+        margin-top: 3px;
+        width: 60%;
+    }
+</style>
+
+<!-- Login Section ====================== -->
+<br />
+<center>
+    <h2>تسجيل الدخول</h2><center><div class="line2"></div><div class="line"></div></center>
+</center>
+
+<section class="section-login pt-60 pt-lg-100 pt-xxl-120 pb-40">
+    <div class="container">
+        <div class="login-container">
+            <div class="login-image">
+                <img src="~/Content/images/product/Screenshot_2024-08-21_143730.png" alt="Login Image" />
+            </div>
+
+            <div class="login-form-wrapper bg-custom-light p-4 p-lg-40" style="background-color:white !important;">
+
+                @using (Html.BeginForm("Login", "user", FormMethod.Post, new { id = "loginForm", @class = "login-form row g-30 wow slideInUp" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <br /><br />
+                    <div class="col-md-12 mb-3">
+                        <br /><br /><br /> <label for="National_ID" class="form-label" style="display: flex; justify-content:center; color: black; font-size:21px">الرقم الوطني</label>
+                        @Html.EditorFor(model => model.National_ID, new { htmlAttributes = new { @class = "form-control", id = "National_ID", required = "" } })
+                        @Html.ValidationMessageFor(model => model.National_ID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-12 mt-4 loggin_button">
+                        <button type="submit" class="btn btn-primary btn-block" style="font-family: 'Cairo', sans-serif;">تسجيل الدخول</button>
+                    </div>
+                    <div class="response py-1"></div>
+                }
+            </div>
+            <!-- login-form-wrapper -->
+        </div>
+        <!-- login-container -->
+    </div>
+    <!-- container -->
+</section>
+<!-- Login Section ====================== -->
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').on('submit', function (e) {
+                e.preventDefault();
+                // Add any additional client-side validation or AJAX form submission logic here
+                var isValid = true;
+                if ($('#National_ID').val().trim() === '') {
+                    $('#National_ID').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#National_ID').removeClass('is-invalid');
+                }
+
+                if (isValid) {
+                    this.submit();
+                }
+            });
+        });
+    </script>
+}

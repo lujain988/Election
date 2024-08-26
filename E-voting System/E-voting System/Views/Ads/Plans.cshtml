@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "الخطط";
+}
+
+<section id="pricing" class="pricing-content section-padding">
+    <div class="container">
+        <div class="section-title text-center">
+            <br /><br />
+            <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+            <style>
+                body, h1, h2, h3, h4, h5, h6 {
+                    font-family: 'Cairo', sans-serif;
+                }
+
+                .line {
+                    border-bottom: 3px solid red;
+                    margin-top: 3px;
+                    width: 70%;
+                }
+
+                .line2 {
+                    border-bottom: 3px solid darkgreen;
+                    margin-top: 3px;
+                    width: 60%;
+                }
+            </style>
+            <h1> خطط الإعلانات</h1><center><div class="line2"></div><div class="line"></div></center>
+            <br />
+            <h3>
+                اختر الخطة التي تناسب احتياجاتك للمشاركة في العملية الانتخابية
+            </h3>
+        </div>
+        <div class="pricing-row">
+            <div class="pricing_design">
+                <div class="single-pricing">
+                    <div class="price-head text-center">
+                        <h1><img src="~/Content/images/product/Screenshot_2024-08-21_100627.png" alt="خطة مجانية" class="price-image" /></h1>
+                    </div>
+                    <ul>
+                        <li><span style="color: green;">&#10004;</span> <b>تطبيق مجاني</b> للمناظرة</li>
+                        <li><span style="color: green;">&#10004;</span> اختر المرشح الذي تريد المناظرة معه</li>
+                        <li><span style="color: green;">&#10004;</span> توفير رابط Zoom لكل مناظرة</li>
+                        <li><span style="color: green;">&#10004;</span> جدولة مرنة للمناظرات</li>
+                        <li><span style="color: green;">&#10004;</span> رسائل البريد الإلكتروني لإشعار المشاركين في المناظرة</li>
+                    </ul><br />
+                    <div class="pricing-price"></div>
+                    @Html.ActionLink("اطلب الآن", "Index", "Debates", new { plan = "Free", amount = 0 }, new { @class = "price_btn" })
+                </div>
+            </div>
+
+            <div class="pricing_design">
+                <div class="single-pricing">
+                    <div class="price-head text-center">
+                        <h1><img src="~/Content/images/product/Screenshot_2024-08-21_100749.png" alt="خطة عادية" class="price-image" /></h1>
+                    </div>
+                    <ul>
+                        <li><span style="color: green;">&#10004;</span> حملات إعلانية</li>
+                        <li><span style="color: green;">&#10004;</span> إرسال رابط يوتيوب لبرنامجك</li>
+                        <li><span style="color: green;">&#10004;</span> نشر في موجز الأخبار لمدة <b>3</b> أيام</li>
+                        <li><span style="color: green;">&#10004;</span> رسائل البريد الإلكتروني مع مشاركة على فيسبوك</li>
+                        <li><span style="color: green;">&#10004;</span> <b>منصة تفاعلية</b> في جميع أنحاء المملكة</li>
+                    </ul>
+                    <div class="pricing-price"></div>
+                    @Html.ActionLink("اطلب الآن", "Ads", "Ads", new { plan = "Standard", amount = 30 }, new { @class = "price_btn" })
+                </div>
+            </div>
+
+            <div class="pricing_design">
+                <div class="single-pricing">
+                    <div class="price-head text-center">
+                        <h1><img src="~/Content/images/product/Screenshot_2024-08-21_100758.png" alt="خطة متميزة" class="price-image" /></h1>
+                    </div>
+                    <ul>
+                        <li><span style="color: green;">&#10004;</span> حملات إعلانية</li>
+                        <li><span style="color: green;">&#10004;</span> إرسال رابط يوتيوب لبرنامجك</li>
+                        <li><span style="color: green;">&#10004;</span> نشر في موجز الأخبار لمدة <b>9</b> أيام</li>
+                        <li><span style="color: green;">&#10004;</span> رسائل البريد الإلكتروني مع مشاركة على فيسبوك</li>
+                        <li><span style="color: green;">&#10004;</span> <b>منصة تفاعلية</b> في جميع أنحاء المملكة</li>
+                    </ul>
+                    <div class="pricing-price"></div>
+                    @Html.ActionLink("اطلب الآن", "Ads", "Ads", new { plan = "Premium", amount = 60 }, new { @class = "price_btn" })
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    body {
+        margin-top: 20px;
+        background: #dcdcdc;
+    }
+
+    .pricing-content {
+        position: relative;
+    }
+
+    .pricing_design {
+        position: relative;
+        margin: 10px;
+        flex: 1 1 25%;
+        max-width: 300px;
+    }
+
+        .pricing_design .single-pricing {
+            background: var(--bs-primary);
+            padding: 30px 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px -10px rgba(0, 64, 128, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+            .pricing_design .single-pricing:before {
+                content: "";
+                background-color: #fff;
+                width: 100%;
+                height: 100%;
+                border-radius: 18px 18px 150px 18px;
+                border: 1px solid #eee;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                z-index: -1;
+            }
+
+    .price-head h2 {
+        margin-bottom: 10px;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .price-head h1 {
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    .price-image {
+        max-width: 208px;
+        height: auto;
+    }
+
+    .single-pricing ul {
+        list-style: none;
+        margin-top: 20px;
+    }
+
+        .single-pricing ul li {
+            line-height: 28px;
+        }
+
+    .price_btn {
+        background: var(--bs-primary);
+        padding: 8px 20px;
+        color: #fff;
+        display: inline-block;
+        margin-top: 15px;
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+        .price_btn:hover {
+            background: #0aa1d6;
+        }
+
+    a {
+        text-decoration: none;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+    }
+
+        .section-title h2 {
+            font-size: 35px;
+            font-weight: 600;
+            margin-top: 0;
+            position: relative;
+            text-transform: capitalize;
+        }
+
+    .pricing-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>

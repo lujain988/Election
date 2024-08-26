@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<br />
+<br />
+<center> <h2 style=" font-family: 'Cairo', sans-serif;"> تقديم طلب مناظرة</h2><div class="line2"></div><div class="line"></div></center>
+<br />
+<br />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@using (Html.BeginForm("Index", "Debates", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <style>
+        .form-image-container {
+            display: flex; /* Use Flexbox for horizontal layout */
+            align-items: flex-start; /* Align items at the start */
+            justify-content: space-between; /* Space between the form and image */
+            position: relative; /* Position relative for absolute children */
+            direction: rtl; /* Set text direction to RTL */
+        }
+
+        .line {
+            border-bottom: 3px solid red;
+            margin-top: 3px;
+            width: 80%;
+        }
+
+        .line2 {
+            border-bottom: 3px solid darkgreen;
+            margin-top: 3px;
+            width: 70%;
+        }
+
+        .form-container {
+            flex: 1; /* Allow form to take available space */
+            margin-left: 20px; /* Space between form and image */
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for form */
+            border-radius: 5px; /* Optional: add rounded corners */
+            padding: 20px; /* Optional: add padding */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add shadow */
+        }
+
+        .image-container {
+            flex: 1; /* Allow image container to take available space */
+            display: flex; /* Center image vertically */
+            align-items: center; /* Center image vertically */
+            justify-content: center; /* Center image horizontally */
+        }
+
+            .image-container img {
+                max-width: 100%; /* Ensure image is responsive */
+                height: 575px;
+            }
+
+        .form-card {
+            background: transparent; /* Make form card background transparent */
+            border: none; /* Remove border */
+        }
+
+        .form-label {
+            text-align: right; /* Align labels to the right */
+        }
+
+        .form-control {
+            text-align: right; /* Align input text to the right */
+        }
+
+        .inline-inputs {
+            display: flex; /* Use Flexbox for horizontal layout */
+            justify-content: space-around; /* Space between the inputs */
+            flex-direction: column;
+        }
+
+        .inline-inputs-candidates {
+            display: flex; /* Use Flexbox for horizontal layout */
+            justify-content: flex-start;
+        }
+
+            .inline-inputs-candidates .form-control {
+                width: 95%; /* Width for the first candidate input */
+            }
+
+                .inline-inputs-candidates .form-control.list {
+                    width: 95%; /* Width for the candidate list input */
+                }
+
+        .inline-inputs .form-control {
+            width: 90%; /* Adjust width to fit in one line */
+        }
+
+        .btn-custom {
+            background-color: #dc3545; /* Nice red color */
+            color: white;
+            border: none;
+            padding: 0.5rem 2rem; /* Padding for the button */
+            border-radius: 0.3rem; /* Slightly rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+
+            .btn-custom:hover {
+                background-color: #c82333; /* Darker red for hover effect */
+                color: white;
+            }
+    </style>
+
+    <div class="container">
+        <div class="form-image-container">
+            <div class="form-container">
+                <div class="form-card">
+                    <div class="card-body">
+                        <div class="mb-3 inline-inputs">
+                            <div>
+                                <label for="Circle_ID" class="form-label">رقم الدائرة</label>
+                                <input name="Circle_ID" type="text" class="form-control" id="Circle_ID" dir="rtl">
+                            </div>
+                            <div>
+                                <label for="Date_Of_Debate" class="form-label">تاريخ المناظرة</label>
+                                <input name="Date_Of_Debate" type="date" class="form-control" id="Date_Of_Debate" dir="rtl">
+                            </div>
+                        </div>
+                        <div class="mb-3 inline-inputs">
+                            <label for="Topic" class="form-label">عنوان المناظرة</label>
+                            <input name="Topic" type="text" class="form-control" id="Topic" dir="rtl">
+                        </div>
+                        <div class="mb-3 inline-inputs-candidates">
+                            <div>
+                                <label for="First_Candidate" class="form-label">المرشح الأول</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input name="First_Candidate" type="text" class="form-control" id="First_Candidate" dir="rtl">
+                            </div>
+                            <div>
+                                <label for="First_Candidate_List" class="form-label">رقم قائمة المرشح الأول</label>
+                                <input name="First_Candidate_List" type="text" class="form-control list" id="First_Candidate_List" dir="rtl">
+                            </div>
+                        </div>
+                        <div class="mb-3 inline-inputs-candidates">
+                            <div>
+                                <label for="Second_Candidate" class="form-label">المرشح الثاني</label>&nbsp;&nbsp;&nbsp;
+                                <input name="Second_Candidate" type="text" class="form-control" id="Second_Candidate" dir="rtl">
+                            </div>
+                            <div>
+                                <label for="Second_Candidate_List" class="form-label">رقم قائمة المرشح الثاني</label>
+                                <input name="Second_Candidate_List" type="text" class="form-control list" id="Second_Candidate_List" dir="rtl">
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-custom" style="font-family: 'Cairo', sans-serif;" onclick="submitForm()">تقديم الطلب</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="~/Content/images/product/Screenshot_2024-08-20_224351.png" alt="Image Description">
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function submitForm() {
+            Swal.fire({
+                title: 'تم التقديم!',
+                text: 'تم تقديم بيانات المترشحين بنجاح.',
+                icon: 'success',
+                confirmButtonText: 'حسنًا'
+            }); // edit the timing
+        }
+    </script>
+}
